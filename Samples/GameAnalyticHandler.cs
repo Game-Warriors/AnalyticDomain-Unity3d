@@ -4,6 +4,7 @@ namespace Managements.Handlers.Analytics
 {
 #if GAME_ANALYTICS
     using GameAnalyticsSDK;
+    using System;
     using System.Threading.Tasks;
 
     public class GameAnalyticHandler : IAnalyticHandler, ICustomAnalytic, IEngagementAnalytic, IShopAnalytic, ITutorialAnalytic, ILevelAnalytic, IResourceAnalytic
@@ -33,7 +34,7 @@ namespace Managements.Handlers.Analytics
             GameAnalytics.NewDesignEvent(eventName);
         }
 
-        void ICustomAnalytic.CustomEvent(string eventName, string param1Name, object param1)
+        void ICustomAnalytic.CustomEvent<T1>(string eventName, string param1Name, T1 param1)
         {
             if (param1 is float)
             {
@@ -49,9 +50,14 @@ namespace Managements.Handlers.Analytics
             GameAnalytics.NewDesignEvent($"{eventName}:{param1}");
         }
 
-        void ICustomAnalytic.CustomEvent(string eventName, string param1Name, object param1, string param2Name, object param2)
+        void ICustomAnalytic.CustomEvent<T1, T2>(string eventName, string param1Name, T1 param1, string param2Name, T2 param2)
         {
             GameAnalytics.NewDesignEvent($"{eventName}:{param1}:{param2}");
+        }
+
+        void ICustomAnalytic.CustomEvent<T1, T2, T3>(string eventName, string param1Name, T1 param1, string param2Name, T2 param2, string param3Name, T3 param3)
+        {
+            return;
         }
 
         void ILevelAnalytic.StartLevel(string levelId, int levelIndex)
@@ -165,6 +171,20 @@ namespace Managements.Handlers.Analytics
             GameAnalytics.NewResourceEvent(GAResourceFlowType.Sink, currencyType, count, spendType, type);
         }
 
+        void IEngagementAnalytic.InvideFriendClicked(string location)
+        {
+            return;
+        }
+
+        void ITutorialAnalytic.StartTutorial(string tutorialKey, string LevelId, int levelIndex)
+        {
+            return;
+        }
+
+        void ITutorialAnalytic.CompleteTutorial(string tutorialKey, string LevelId, int levelIndex)
+        {
+            return;
+        }
     }
 #endif
 }

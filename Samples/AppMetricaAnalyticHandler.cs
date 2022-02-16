@@ -9,6 +9,7 @@ namespace Managements.Handlers.Analytics
     {
         private readonly Dictionary<string, object> CUSTOME_EVENT1;
         private readonly Dictionary<string, object> CUSTOME_EVENT2;
+        private readonly Dictionary<string, object> CUSTOME_EVENT3;
 
         public EAnalyticType AnalyticType => EAnalyticType.AppMetrica;
 
@@ -17,6 +18,7 @@ namespace Managements.Handlers.Analytics
 
             CUSTOME_EVENT1 = new Dictionary<string, object>(1);
             CUSTOME_EVENT2 = new Dictionary<string, object>(2);
+            CUSTOME_EVENT3 = new Dictionary<string, object>(3);
 
             if (!string.IsNullOrEmpty(startAnalyticEvent))
                 AppMetrica.Instance.ReportEvent(startAnalyticEvent);
@@ -46,6 +48,15 @@ namespace Managements.Handlers.Analytics
             CUSTOME_EVENT2.Add(param1Name, param1);
             CUSTOME_EVENT2.Add(param2Name, param2);
             AppMetrica.Instance.ReportEvent(eventName, CUSTOME_EVENT2);
+        }
+
+        public void CustomEvent(string eventName, string param1Name, object param1, string param2Name, object param2, string param3Name, object param3)
+        {
+            CUSTOME_EVENT3.Clear();
+            CUSTOME_EVENT3.Add(param1Name, param1);
+            CUSTOME_EVENT3.Add(param2Name, param2);
+            CUSTOME_EVENT3.Add(param3Name, param3);
+            AppMetrica.Instance.ReportEvent(eventName, CUSTOME_EVENT3);
         }
 
         void IAnalyticHandler.SetABTestTag(string abTestTag)

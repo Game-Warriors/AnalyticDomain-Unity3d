@@ -9,10 +9,20 @@ namespace Managements.Handlers.Analytics
 
     public class AppsFlyerAnalyticHandler : IAnalyticHandler, ICustomAnalytic, IShopAnalytic
     {
+        private readonly Dictionary<string, object> CUSTOME_EVENT0;
+        private readonly Dictionary<string, object> CUSTOME_EVENT1;
+        private readonly Dictionary<string, object> CUSTOME_EVENT2;
+        private readonly Dictionary<string, object> CUSTOME_EVENT3;
+
         public EAnalyticType AnalyticType => EAnalyticType.AppsFlyer;
 
         public AppsFlyerAnalyticHandler(string devKey, string appleAppId)
         {
+            CUSTOME_EVENT0 = new Dictionary<string, object>(0);
+            CUSTOME_EVENT1 = new Dictionary<string, object>(1);
+            CUSTOME_EVENT2 = new Dictionary<string, object>(2);
+            CUSTOME_EVENT3 = new Dictionary<string, object>(3);
+
             if (!string.IsNullOrEmpty(devKey))
             {
                 AppsFlyer.initSDK(devKey, appleAppId);
@@ -31,23 +41,29 @@ namespace Managements.Handlers.Analytics
 
         public void CustomEvent(string eventName)
         {
-            Dictionary<string, string> eventValues = new Dictionary<string, string>();
-            AppsFlyer.sendEvent(eventName, eventValues);
+            AppsFlyer.sendEvent(eventName, CUSTOME_EVENT1);
         }
 
-        public void CustomEvent(string eventName, string param1Name, object param1)
+        public void CustomEvent<T1>(string eventName, string param1Name, T1 param1)
         {
-            Dictionary<string, string> eventValues = new Dictionary<string, string>();
-            eventValues.Add(param1Name, param1.ToString());
-            AppsFlyer.sendEvent(eventName, eventValues);
+            CUSTOME_EVENT1.Add(param1Name, param1.ToString());
+            AppsFlyer.sendEvent(eventName, CUSTOME_EVENT1);
         }
 
-        public void CustomEvent(string eventName, string param1Name, object param1, string param2Name, object param2)
+        public void CustomEvent<T1,T2>(string eventName, string param1Name, T1 param1, string param2Name, T2 param2)
         {
-            Dictionary<string, string> eventValues = new Dictionary<string, string>();
-            eventValues.Add(param1Name, param1.ToString());
-            eventValues.Add(param2Name, param2.ToString());
-            AppsFlyer.sendEvent(eventName, eventValues);
+            CUSTOME_EVENT2.Add(param1Name, param1.ToString());
+            CUSTOME_EVENT2.Add(param2Name, param2.ToString());
+            AppsFlyer.sendEvent(eventName, CUSTOME_EVENT2);
+        }
+
+
+        public void CustomEvent<T1,T2,T3>(string eventName, string param1Name, T1 param1, string param2Name, T2 param2, string param3Name, T3 param3)
+        {
+            CUSTOME_EVENT3.Add(param1Name, param1.ToString());
+            CUSTOME_EVENT3.Add(param2Name, param2.ToString());
+            CUSTOME_EVENT3.Add(param3Name, param3.ToString());
+            AppsFlyer.sendEvent(eventName, CUSTOME_EVENT3);
         }
 
         public void PurchaseShopPack(string packId)

@@ -4,6 +4,8 @@ namespace Managements.Handlers.Analytics
 {
 #if FIREBASE
     using Firebase.Analytics;
+    using System;
+    using System.Globalization;
     using System.Threading.Tasks;
 
     public class FirebaseAnalyticHandler : IAnalyticHandler, ILevelAnalytic, IShopAnalytic, IResourceAnalytic, ICustomAnalytic
@@ -51,31 +53,19 @@ namespace Managements.Handlers.Analytics
             FirebaseAnalytics.LogEvent(eventName);
         }
 
-        void ICustomAnalytic.CustomEvent(string eventName, string param1Name, object param1)
+        void ICustomAnalytic.CustomEvent<T1>(string eventName, string param1Name, T1 param1)
         {
-            if (param1 is float)
-            {
-                FirebaseAnalytics.LogEvent(eventName, new Parameter(param1Name, (float)param1));
-            }
-            else if (param1 is double)
-            {
-                FirebaseAnalytics.LogEvent(eventName, new Parameter(param1Name, (double)param1));
-            }
-            else if (param1 is int)
-            {
-                FirebaseAnalytics.LogEvent(eventName, new Parameter(param1Name, (int)param1));
-            }
-            else if (param1 is long)
-            {
-                FirebaseAnalytics.LogEvent(eventName, new Parameter(param1Name, (long)param1));
-            }
-            else
-                FirebaseAnalytics.LogEvent(eventName, new Parameter(param1Name, param1.ToString()));
+            FirebaseAnalytics.LogEvent(eventName, CreateParameter<T1>(param1Name, param1));
         }
 
-        void ICustomAnalytic.CustomEvent(string eventName, string param1Name, object param1, string param2Name, object param2)
+        void ICustomAnalytic.CustomEvent<T1,T2>(string eventName, string param1Name, T1 param1, string param2Name, T2 param2)
         {
-            FirebaseAnalytics.LogEvent(eventName, CreateParameter(param1Name, param1), CreateParameter(param2Name, param2));
+            FirebaseAnalytics.LogEvent(eventName, CreateParameter<T1>(param1Name, param1), CreateParameter<T2>(param2Name, param2));
+        }
+
+        void ICustomAnalytic.CustomEvent<T1, T2, T3>(string eventName, string param1Name, T1 param1, string param2Name, T2 param2, string param3Name, T3 param3)
+        {
+            FirebaseAnalytics.LogEvent(eventName, CreateParameter<T1>(param1Name, param1), CreateParameter<T2>(param2Name, param2), CreateParameter<T3>(param3Name, param3));
         }
 
         void IAnalyticHandler.SetABTestTag(string abTestTag)
@@ -122,23 +112,23 @@ namespace Managements.Handlers.Analytics
             FirebaseAnalytics.LogEvent("level_finish", new Parameter("level_name", levelId), new Parameter("level_number", levelIndex));
         }
 
-        private Parameter CreateParameter(string paramName, object param)
+        private Parameter CreateParameter<T>(string paramName, T param) where T : IConvertible
         {
             if (param is float)
             {
-                return new Parameter(paramName, (float)param);
+                return new Parameter(paramName, param.ToSingle(CultureInfo.CurrentCulture.NumberFormat));
             }
             else if (param is double)
             {
-                return new Parameter(paramName, (double)param);
+                return new Parameter(paramName, param.ToDouble(CultureInfo.CurrentCulture.NumberFormat));
             }
             else if (param is int)
             {
-                return new Parameter(paramName, (int)param);
+                return new Parameter(paramName, param.ToInt32(CultureInfo.CurrentCulture.NumberFormat));
             }
             else if (param is long)
             {
-                return new Parameter(paramName, (long)param);
+                return new Parameter(paramName, param.ToInt64(CultureInfo.CurrentCulture.NumberFormat));
             }
             else
                 return new Parameter(paramName, param.ToString());
