@@ -1,8 +1,8 @@
-﻿using GameWrriors.AnalyticDomain.Abstraction;
+﻿using GameWarriors.AnalyticDomain.Abstraction;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GameWrriors.AnalyticDomain.Core
+namespace GameWarriors.AnalyticDomain.Core
 {
     public class AnalyticSystem : IAnalytic
     {

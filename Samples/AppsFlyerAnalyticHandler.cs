@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GameWrriors.AnalyticDomain.Abstraction;
+using GameWarriors.AnalyticDomain.Abstraction;
 
 namespace Managements.Handlers.Analytics
 {

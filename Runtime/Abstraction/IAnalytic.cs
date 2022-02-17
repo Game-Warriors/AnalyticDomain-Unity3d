@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GameWrriors.AnalyticDomain.Abstraction
+namespace GameWarriors.AnalyticDomain.Abstraction
 {
     public interface IAnalytic
     {

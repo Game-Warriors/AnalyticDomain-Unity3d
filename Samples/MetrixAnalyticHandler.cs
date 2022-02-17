@@ -1,4 +1,4 @@
-﻿using GameWrriors.AnalyticDomain.Abstraction;
+﻿using GameWarriors.AnalyticDomain.Abstraction;
 
 namespace Managements.Handlers.Analytics
 {

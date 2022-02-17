@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameWrriors.AnalyticDomain.Abstraction
+namespace GameWarriors.AnalyticDomain.Abstraction
 {
     public interface ICustomAnalytic
     {

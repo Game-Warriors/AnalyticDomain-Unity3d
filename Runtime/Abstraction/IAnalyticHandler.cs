@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace GameWrriors.AnalyticDomain.Abstraction
+namespace GameWarriors.AnalyticDomain.Abstraction
 {
     public enum EAnalyticType
     {

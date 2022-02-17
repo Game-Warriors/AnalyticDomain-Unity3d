@@ -1,8 +1,8 @@
-﻿using GameWrriors.AnalyticDomain.Abstraction;
+﻿using GameWarriors.AnalyticDomain.Abstraction;
 using System;
 using System.Collections.Generic;
 
-namespace GameWrriors.AnalyticDomain.Extension
+namespace GameWarriors.AnalyticDomain.Extension
 {
     public static class AnalyticExtension
     {

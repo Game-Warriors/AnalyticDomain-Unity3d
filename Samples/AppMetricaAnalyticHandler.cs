@@ -1,4 +1,4 @@
-﻿using GameWrriors.AnalyticDomain.Abstraction;
+﻿using GameWarriors.AnalyticDomain.Abstraction;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
