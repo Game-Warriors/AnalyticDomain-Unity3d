@@ -39,6 +39,15 @@ namespace GameWarriors.AnalyticDomain.Extension
             }
         }
 
+        public static void CustomEvent<T1, T2>(this IAnalytic analytics, string eventName, string param1Name,
+            T1 param1, string param2Name, T2 param2) where T1 : IConvertible where T2 : IConvertible
+        {
+            foreach (var item in analytics.CustomAnalytics)
+            {
+                item.CustomEvent(eventName, param1Name, param1, param2Name, param2);
+            }
+        }
+
         public static void CustomEvent<T1, T2, T3>(this IAnalytic customAnalytics, string eventName, string param1Name,
             T1 param1, string param2Name, T2 param2, string param3Name, T3 param3) where T1 : IConvertible where T2 : IConvertible where T3 : IConvertible
         {
@@ -48,19 +57,29 @@ namespace GameWarriors.AnalyticDomain.Extension
             }
         }
 
+        public static void CustomEvent<T1, T2, T3, T4>(this IAnalytic customAnalytics, string eventName, string param1Name,
+            T1 param1, string param2Name, T2 param2, string param3Name, T3 param3, string param4Name, T4 param4) where T1 : IConvertible where T2 : IConvertible where T3 : IConvertible where T4 : IConvertible
+        {
+            foreach (var item in customAnalytics.CustomAnalytics)
+            {
+                item.CustomEvent(eventName, param1Name, param1, param2Name, param2, param3Name, param3, param4Name, param4);
+            }
+        }
+
+        public static void CustomEvent(this IAnalytic customAnalytics, string eventName, params (string paramName, IConvertible param)[] items)
+        {
+            foreach (var item in customAnalytics.CustomAnalytics)
+            {
+                item.CustomEvent(eventName, items);
+            }
+        }
+
         public static void CustomFalseEvent(this IAnalytic analytics, string eventName, string param1Name, object param1)
         {
 
         }
 
-        public static void CustomEvent<T1, T2>(this IAnalytic analytics, string eventName, string param1Name,
-            T1 param1, string param2Name, T2 param2) where T1 : IConvertible where T2 : IConvertible
-        {
-            foreach (var item in analytics.CustomAnalytics)
-            {
-                item.CustomEvent(eventName, param1Name, param1, param2Name, param2);
-            }
-        }
+
 
         public static void CustomEvent<T1>(this IAnalytic analytics, string eventName, string param1Name, T1 param1, params EAnalyticType[] analyticTypes) where T1 : IConvertible
         {
