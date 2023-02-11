@@ -1,24 +1,47 @@
 ﻿using GameWarriors.AnalyticDomain.Abstraction;
 using System;
-using System.Collections.Generic;
 
 namespace GameWarriors.AnalyticDomain.Extension
 {
     public static class AnalyticExtension
     {
-        public static void LevelStartEvent(this IAnalytic analytics, string levelId, int levelIndex)
+        public static void StartLevelEvent(this IAnalytic analytics, string levelId, int levelIndex, int? score = default)
         {
             foreach (var item in analytics.LevelAnalytics)
             {
-                item.StartLevel(levelId, levelIndex);
+                item.StartLevel(levelId, levelIndex, score);
             }
         }
 
-        public static void LevelEndEvent(this IAnalytic analytics, string levelId, int levelIndex)
+        public static void CompleteLevelEvent(this IAnalytic analytics, string levelId, int levelIndex, int? score = default)
         {
             foreach (var item in analytics.LevelAnalytics)
             {
-                item.LevelCompleted(levelId, levelIndex);
+                item.LevelCompleted(levelId, levelIndex, score);
+            }
+        }
+
+        public static void FailLevelEvent(this IAnalytic analytics, string levelId, int levelIndex, int? score = default)
+        {
+            foreach (var item in analytics.LevelAnalytics)
+            {
+                item.LevelFailed(levelId, levelIndex, score);
+            }
+        }
+
+        public static void StartQuestEvent(this IAnalytic analytics, string Id, string levelId, int levelIndex)
+        {
+            foreach (var item in analytics.QuestAnalytics)
+            {
+                item.QuestStart(Id, levelId, levelIndex);
+            }
+        }
+
+        public static void QuestDoneEvent(this IAnalytic analytics, string Id, string levelId, int levelIndex, IReward reward = default)
+        {
+            foreach (var item in analytics.QuestAnalytics)
+            {
+                item.QuestDone(Id, levelId, levelIndex, reward);
             }
         }
 
@@ -78,7 +101,6 @@ namespace GameWarriors.AnalyticDomain.Extension
         {
 
         }
-
 
 
         public static void CustomEvent<T1>(this IAnalytic analytics, string eventName, string param1Name, T1 param1, params EAnalyticType[] analyticTypes) where T1 : IConvertible
