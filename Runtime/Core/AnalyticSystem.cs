@@ -119,5 +119,19 @@ namespace GameWarriors.AnalyticDomain.Core
                 }
             }
         }
+
+        public IEnumerable<IQuestAnalytic> QuestAnalytics
+        {
+            get
+            {
+                int length = _analyticHandlers.Length;
+                for (int i = 0; i < length; ++i)
+                {
+                    IQuestAnalytic tmp = _analyticHandlers[i] as IQuestAnalytic;
+                    if (tmp != null)
+                        yield return tmp;
+                }
+            }
+        }
     }
 }

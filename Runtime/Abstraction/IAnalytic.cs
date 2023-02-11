@@ -11,6 +11,7 @@ namespace GameWarriors.AnalyticDomain.Abstraction
         IEnumerable<ITutorialAnalytic> TutorialAnalytics { get; }
         IEnumerable<ILevelAnalytic> LevelAnalytics { get; }
         IEnumerable<IResourceAnalytic> ResourceAnalytics { get; }
+        IEnumerable<IQuestAnalytic> QuestAnalytics { get; }
     }
 }
 
