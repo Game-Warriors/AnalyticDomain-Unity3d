@@ -29,19 +29,19 @@ namespace GameWarriors.AnalyticDomain.Extension
             }
         }
 
-        public static void StartQuestEvent(this IAnalytic analytics, string Id, string levelId, int levelIndex)
+        public static void StartQuestEvent(this IAnalytic analytics, string name, string type, string levelId, int levelIndex)
         {
             foreach (var item in analytics.QuestAnalytics)
             {
-                item.QuestStart(Id, levelId, levelIndex);
+                item.QuestStart(name, type, levelId, levelIndex);
             }
         }
 
-        public static void QuestDoneEvent(this IAnalytic analytics, string Id, string levelId, int levelIndex, IReward reward = default)
+        public static void QuestDoneEvent(this IAnalytic analytics, string name, string type, string levelId, int levelIndex, IReward reward = default)
         {
             foreach (var item in analytics.QuestAnalytics)
             {
-                item.QuestDone(Id, levelId, levelIndex, reward);
+                item.QuestDone(name, type, levelId, levelIndex, reward);
             }
         }
 
@@ -103,12 +103,12 @@ namespace GameWarriors.AnalyticDomain.Extension
         }
 
 
-        public static void CustomEvent<T1>(this IAnalytic analytics, string eventName, string param1Name, T1 param1, params EAnalyticType[] analyticTypes) where T1 : IConvertible
+        public static void CustomEvent<T1>(this IAnalytic analytics, string eventName, string param1Name, T1 param1, params string[] analyticTypes) where T1 : IConvertible
         {
             foreach (var item in analytics.CustomAnalytics)
             {
-                EAnalyticType type = ((IAnalyticHandler)item).AnalyticType;
-                foreach (EAnalyticType analyticType in analyticTypes)
+                string type = ((IAnalyticHandler)item).AnalyticType;
+                foreach (string analyticType in analyticTypes)
                 {
                     if (analyticType == type)
                         item.CustomEvent(eventName, param1Name, param1);
@@ -116,11 +116,11 @@ namespace GameWarriors.AnalyticDomain.Extension
             }
         }
 
-        public static void CustomEvent<T1>(this IAnalytic analytics, string eventName, string param1Name, T1 param1, EAnalyticType analyticType) where T1 : IConvertible
+        public static void CustomEvent<T1>(this IAnalytic analytics, string eventName, string param1Name, T1 param1, string analyticType) where T1 : IConvertible
         {
             foreach (var item in analytics.CustomAnalytics)
             {
-                EAnalyticType type = ((IAnalyticHandler)item).AnalyticType;
+                string type = ((IAnalyticHandler)item).AnalyticType;
                 if (analyticType == type)
                     item.CustomEvent(eventName, param1Name, param1);
             }
