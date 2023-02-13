@@ -1,6 +1,6 @@
 {
   "name": "com.gamewarriors.analyticsystem",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "displayName": "Analytic System",
   "description": "This package provide base structure to using multiply analytic plugin",
   "unity": "2019.1",

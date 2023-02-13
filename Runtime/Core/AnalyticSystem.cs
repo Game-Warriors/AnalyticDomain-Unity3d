@@ -133,5 +133,18 @@ namespace GameWarriors.AnalyticDomain.Core
                 }
             }
         }
+
+        public IEnumerable<IAdAnalytic> AdAnalytics
+        {
+            get
+            {
+                int length = _analyticHandlers.Length;
+                for (int i = 0; i < length; ++i)
+                {
+                    if (_analyticHandlers[i] is IAdAnalytic tmp)
+                        yield return tmp;
+                }
+            }
+        }
     }
 }
