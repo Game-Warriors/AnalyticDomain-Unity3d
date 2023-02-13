@@ -1,3 +1,6 @@
+  version : 0.1.4
+  change analytic type from enum to string, add new arguments to quest analytic
+
   version : 0.1.3
   add abstraction for quest and add level failed for level analytic
 
