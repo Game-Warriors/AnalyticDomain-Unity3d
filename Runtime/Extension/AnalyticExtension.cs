@@ -1,5 +1,8 @@
-﻿using GameWarriors.AnalyticDomain.Abstraction;
+﻿using Codice.Client.BaseCommands;
+using GameWarriors.AnalyticDomain.Abstraction;
 using System;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.Analytics;
 
 namespace GameWarriors.AnalyticDomain.Extension
 {
@@ -229,6 +232,46 @@ namespace GameWarriors.AnalyticDomain.Extension
             foreach (var item in analytics.ResourceAnalytics)
             {
                 item.SpendCurrency(currencyType, count, "reward", type);
+            }
+        }
+
+        public static void LoadAdSucessEvent(this IAnalytic analytic, string adType)
+        {
+            foreach (var item in analytic.AdAnalytics)
+            {
+                item.LoadAdSuccess(adType);
+            }
+        }
+
+        public static void LoadAdFailEvent(this IAnalytic analytic, string adType, int errorCode, string errorMessage)
+        {
+            foreach (var item in analytic.AdAnalytics)
+            {
+                item.LoadAdFailed(adType, errorCode, errorMessage);
+            }
+        }
+
+        public static void ShowAdSuccessEvent(this IAnalytic analytic, string adType, string placement, string adSource, string responseId)
+        {
+            foreach (var item in analytic.AdAnalytics)
+            {
+                item.ShowAdSuccess(adType, placement, adSource, responseId);
+            }
+        }
+
+        public static void ShowAdFailEvent(this IAnalytic analytic, string adType, string placement, int errorCode, string errorMessage)
+        {
+            foreach (var item in analytic.AdAnalytics)
+            {
+                item.ShowAdFailed(adType, placement, errorCode, errorMessage);
+            }
+        }
+
+        public static void AdRevenueEvent(this IAnalytic analytic, string adType, string adSource, string currency, double value, string precision)
+        {
+            foreach (var item in analytic.AdAnalytics)
+            {
+                item.AdRevenue(adType, adSource, currency, value, precision);
             }
         }
     }

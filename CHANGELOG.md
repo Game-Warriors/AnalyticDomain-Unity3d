@@ -1,3 +1,6 @@
+  version : 0.1.5
+  add new abstraction advertise analytic events
+
   version : 0.1.4
   change analytic type from enum to string, add new arguments to quest analytic
 
