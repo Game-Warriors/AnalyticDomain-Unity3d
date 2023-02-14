@@ -1,8 +1,5 @@
-﻿using Codice.Client.BaseCommands;
-using GameWarriors.AnalyticDomain.Abstraction;
+﻿using GameWarriors.AnalyticDomain.Abstraction;
 using System;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.Analytics;
 
 namespace GameWarriors.AnalyticDomain.Extension
 {
