@@ -1,3 +1,6 @@
+  version : 0.1.6
+  improve shop analytic abstraction and add new extension methods
+
   version : 0.1.5
   add new abstraction advertise analytic events
 

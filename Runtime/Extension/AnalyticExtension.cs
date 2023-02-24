@@ -167,14 +167,6 @@ namespace GameWarriors.AnalyticDomain.Extension
             }
         }
 
-        public static void PurchaseShopPack(this IAnalytic analytic, string itemName, string purchaseId, string currencyId, float price, string location, string transactionId)
-        {
-            foreach (var item in analytic.ShopAnalytics)
-            {
-                item.PurchaseShopPack(purchaseId);
-                item.PurchaseShopPack(itemName, purchaseId, currencyId, price, location, transactionId);
-            }
-        }
 
         public static void ShopPackClick(this IAnalytic analytics, string itemName,
             string purchaseId, string location)
@@ -269,6 +261,46 @@ namespace GameWarriors.AnalyticDomain.Extension
             foreach (var item in analytic.AdAnalytics)
             {
                 item.AdRevenue(adType, adSource, currency, value, precision);
+            }
+        }
+
+        public static void PurchaseFailedResult(this IAnalytic analytic, string sku, string packName, string isoCurrencyCode, double localizedPrice, string transactionID, string reason)
+        {
+            foreach (var item in analytic.ShopAnalytics)
+            {
+                item.PurchaseFailedResult(sku, packName, isoCurrencyCode, localizedPrice, transactionID, reason);
+            }
+        }
+
+        public static void PurchaseStartFailed(this IAnalytic analytic, string sku, string packName, string reason)
+        {
+            foreach (var item in analytic.ShopAnalytics)
+            {
+                item.PurchaseStartFailed(sku, packName, reason);
+            }
+        }
+
+        public static void PurchaseStartSuccess(this IAnalytic analytic, string sku, string packName, string isoCurrencyCode, double localizedPrice, string transactionID)
+        {
+            foreach (var item in analytic.ShopAnalytics)
+            {
+                item.PurchaseStartSuccess(sku, packName, isoCurrencyCode, localizedPrice, transactionID);
+            }
+        }
+
+        public static void PurchaseSuccessResult(this IAnalytic analytic, string sku, string packName, string isoCurrencyCode, double localizedPrice, string transactionID)
+        {
+            foreach (var item in analytic.ShopAnalytics)
+            {
+                item.PurchaseSuccessResult(sku, packName, isoCurrencyCode, localizedPrice, transactionID);
+            }
+        }
+
+        public static void PurchaseComplete(this IAnalytic analytic, string sku, string packName, string isoCurrencyCode, double localizedPrice, string transactionID)
+        {
+            foreach (var item in analytic.ShopAnalytics)
+            {
+                item.PurchaseComplete(sku, packName, isoCurrencyCode, localizedPrice, transactionID);
             }
         }
     }
