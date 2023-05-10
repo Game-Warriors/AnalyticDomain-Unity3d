@@ -1,3 +1,6 @@
+  version : 0.1.7
+  fix linux error
+
   version : 0.1.6
   improve shop analytic abstraction and add new extension methods
 
