@@ -8,7 +8,6 @@
     "excludePlatforms": [
         "Android",
         "Editor",
-        "EmbeddedLinux",
         "GameCoreScarlett",
         "GameCoreXboxOne",
         "iOS",
