@@ -1,3 +1,6 @@
+  version : 0.1.8
+  adding WaitForLoadingCoroutine method in analytic system class to capable for loading handlers by IEnumerator
+
   version : 0.1.7
   fix linux error
 

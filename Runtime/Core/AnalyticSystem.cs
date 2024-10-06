@@ -1,4 +1,5 @@
 ﻿using GameWarriors.AnalyticDomain.Abstraction;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,6 +22,16 @@ namespace GameWarriors.AnalyticDomain.Core
             foreach (var item in _analyticHandlers)
             {
                 await item.Loading();
+            }
+        }
+
+
+        [UnityEngine.Scripting.Preserve]
+        public IEnumerator WaitForLoadingCoroutine()
+        {
+            foreach (var item in _analyticHandlers)
+            {
+                yield return item.LoadingEnumerable();
             }
         }
 

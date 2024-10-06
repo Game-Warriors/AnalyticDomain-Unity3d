@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Threading.Tasks;
 
 namespace GameWarriors.AnalyticDomain.Abstraction
 {
@@ -8,5 +9,6 @@ namespace GameWarriors.AnalyticDomain.Abstraction
 
         void SetABTestTag(string abTestTag);
         Task Loading();
+        IEnumerable LoadingEnumerable();
     }
 }
